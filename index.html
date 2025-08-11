@@ -1,0 +1,649 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ga Foundation - Global Online Learning Platform</title>
+    
+    <!-- Font Awesome CSS (Embedded icons) -->
+    <style>
+        /* Font Awesome 6.4.0 - Core icons embedded for self-contained operation */
+        .fas, .far, .fab {
+            font-family: "Font Awesome 6 Free", "Font Awesome 6 Brands";
+            font-weight: 900;
+            font-style: normal;
+            text-rendering: auto;
+            -webkit-font-smoothing: antialiased;
+        }
+        
+        /* Core icons used in application */
+        .fa-home:before { content: "\f015"; }
+        .fa-graduation-cap:before { content: "\f19d"; }
+        .fa-clipboard-check:before { content: "\f46c"; }
+        .fa-chevron-down:before { content: "\f078"; }
+        .fa-headphones:before { content: "\f025"; }
+        .fa-book-open:before { content: "\f518"; }
+        .fa-edit:before { content: "\f044"; }
+        .fa-microphone:before { content: "\f130"; }
+        .fa-clipboard-list:before { content: "\f46d"; }
+        .fa-bars:before { content: "\f0c9"; }
+        .fa-times:before { content: "\f00d"; }
+        .fa-users:before { content: "\f0c0"; }
+        .fa-clock:before { content: "\f017"; }
+        .fa-certificate:before { content: "\f0a3"; }
+        .fa-mobile-alt:before { content: "\f3cd"; }
+        .fa-headset:before { content: "\f590"; }
+        .fa-globe:before { content: "\f0ac"; }
+        .fa-lightbulb:before { content: "\f0eb"; }
+        .fa-rocket:before { content: "\f135"; }
+        .fa-heart:before { content: "\f004"; }
+        .fa-star:before { content: "\f005"; }
+        .fa-check:before { content: "\f00c"; }
+        .fa-language:before { content: "\f1ab"; }
+        .fa-flag:before { content: "\f024"; }
+    </style>
+
+    <!-- Font Awesome (CDN - fallback) -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        /* Mobile-optimized root styles */
+        html {
+            scroll-behavior: smooth;
+            -webkit-text-size-adjust: 100%;
+        }
+        
+        body {
+            -webkit-font-smoothing: antialiased;
+            -moz-osx-font-smoothing: grayscale;
+            touch-action: manipulation;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #3c2d1f;
+            background: linear-gradient(135deg, #d4af37 0%, #b8860b 50%, #cd853f 100%);
+            min-height: 100vh;
+            margin: 0;
+            padding: 0;
+        }
+
+        /* Improve tap targets and touch response */
+        button, a, input, select, textarea {
+            touch-action: manipulation;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            color: #3c2d1f;
+            padding: 0;
+            box-shadow: 0 2px 20px rgba(0,0,0,0.1);
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            width: 100%;
+        }
+
+        .navbar {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+        }
+
+        .nav-top-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.75rem 1.5rem;
+            background: rgba(255, 255, 255, 0.98);
+        }
+
+        .logo {
+            text-decoration: none;
+            color: inherit;
+        }
+
+        /* Master Guruvammal Logo for header */
+        .master-guruvammal-logo {
+            /* Layout & Structure */
+            position: relative !important;
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            width: 40px !important;
+            height: 40px !important;
+            box-sizing: border-box !important;
+            
+            /* Typography */
+            font-family: 'Century Gothic', sans-serif !important;
+            font-size: 24px !important;
+            font-weight: 900 !important;
+            letter-spacing: -0.5px !important;
+            line-height: 1 !important;
+            color: #5d3a0a !important;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3) !important;
+            
+            /* Golden Square Background */
+            background: linear-gradient(135deg, rgba(212, 175, 55, 0.15) 0%, rgba(139, 69, 19, 0.25) 50%, rgba(205, 133, 63, 0.2) 100%) !important;
+            backdrop-filter: blur(10px) !important;
+            border-radius: 4px !important;
+            padding: 8px !important;
+            
+            /* Visual Effects */
+            box-shadow: 0 4px 12px rgba(139, 69, 19, 0.2), 0 0 20px rgba(212, 175, 55, 0.1) !important;
+            z-index: 10000 !important;
+            
+            /* Interaction */
+            transition: all 0.3s ease !important;
+        }
+
+        /* Musical note corner element within Master Guruvammal Logo */
+        .master-guruvammal-logo .musical-corner {
+            position: absolute !important;
+            top: 1px !important;
+            right: 2px !important;
+            font-size: 8px !important;
+            color: #5d3a0a !important;
+            font-weight: 900 !important;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3) !important;
+        }
+
+        /* Optional hover effect for Master Guruvammal Logo */
+        .master-guruvammal-logo:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.4), 0 0 50px rgba(212, 175, 55, 0.3);
+        }
+
+        /* Ensure logo container fits Master Logo properly */
+        .logo .master-guruvammal-logo {
+            margin-right: 0.5rem;
+        }
+
+        .mobile-menu-toggle {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            color: #8b4513;
+            cursor: pointer;
+            padding: 0.5rem;
+        }
+
+        .nav-bottom-row {
+            background: rgba(255, 255, 255, 0.95);
+            border-top: 1px solid rgba(139, 69, 19, 0.1);
+            padding: 0 1.5rem;
+        }
+
+        .nav-menu {
+            list-style: none;
+            display: flex;
+            gap: 0;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu li {
+            position: relative;
+        }
+
+        .nav-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 1rem 1.5rem;
+            text-decoration: none;
+            color: #8b4513;
+            font-weight: 600;
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            white-space: nowrap;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            background: rgba(139, 69, 19, 0.1);
+            color: #5d3a0a;
+        }
+
+        
+
+        /* Main content area */
+        .main-content {
+            margin-top: 120px;
+            padding: 2rem 1.5rem;
+            max-width: 1200px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        /* Hero section */
+        .hero-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 4rem 2rem;
+            text-align: center;
+            margin-bottom: 3rem;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 900;
+            color: #8b4513;
+            margin-bottom: 1rem;
+            line-height: 1.2;
+        }
+
+        .hero-subtitle {
+            font-size: 1.3rem;
+            color: #666;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .hero-description {
+            font-size: 1.1rem;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            line-height: 1.7;
+        }
+
+        .cta-button {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #8b4513;
+            color: white;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+            box-shadow: 0 5px 15px rgba(139, 69, 19, 0.3);
+        }
+
+        .cta-button:hover {
+            background: #a0522d;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(139, 69, 19, 0.4);
+        }
+
+        /* Vision section */
+        .vision-section {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            margin-bottom: 3rem;
+        }
+
+        .vision-card {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
+        }
+
+        .vision-card:hover {
+            transform: translateY(-5px);
+            border-color: #8b4513;
+            box-shadow: 0 10px 30px rgba(139, 69, 19, 0.2);
+        }
+
+        .vision-icon {
+            font-size: 3rem;
+            color: #8b4513;
+            margin-bottom: 1rem;
+            display: block;
+            text-align: center;
+        }
+
+        .vision-title {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #8b4513;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+
+        .vision-description {
+            color: #666;
+            text-align: center;
+            line-height: 1.8;
+        }
+
+        /* Stats section */
+        .stats-section {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            border-radius: 15px;
+            padding: 3rem 2rem;
+            text-align: center;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            margin-bottom: 3rem;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 3rem;
+            font-weight: bold;
+            color: #8b4513;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-label {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .mobile-menu-toggle {
+                display: block;
+            }
+
+            .nav-menu {
+                display: none;
+                flex-direction: column;
+                position: absolute;
+                top: 100%;
+                left: 0;
+                right: 0;
+                background: rgba(255, 255, 255, 0.98);
+                box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            }
+
+            .nav-menu.active {
+                display: flex;
+            }
+
+            .nav-menu li {
+                width: 100%;
+            }
+
+            .nav-menu a {
+                padding: 1rem;
+                border-bottom: 1px solid rgba(139, 69, 19, 0.1);
+            }
+
+            .hero-title {
+                font-size: 2.5rem;
+            }
+
+            .hero-subtitle {
+                font-size: 1.1rem;
+            }
+
+            .main-content {
+                padding: 1rem;
+            }
+
+            
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .fade-in-up {
+            animation: fadeInUp 0.6s ease-out;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <nav class="navbar">
+            <!-- Top Row: Logo -->
+            <div class="nav-top-row">
+                <a href="#" class="logo">
+                    <div class="master-guruvammal-logo">
+                        Ga<span class="musical-corner">♪</span>
+                    </div>
+                </a>
+                
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle mobile menu">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+            
+            <!-- Bottom Row: Navigation Menu -->
+                         <div class="nav-bottom-row">
+                 <ul class="nav-menu" id="navMenu">
+                     <li><a href="#home" class="active"><i class="fas fa-home"></i> Home</a></li>
+                     <li><a href="IELTS/index.html"><i class="fas fa-clipboard-check"></i> IELTS</a></li>
+                 </ul>
+             </div>
+        </nav>
+    </header>
+
+    <!-- Main Content -->
+    <main class="main-content">
+        <!-- Hero Section -->
+        <section class="hero-section fade-in-up">
+            <h1 class="hero-title">Ga Foundation</h1>
+            <p class="hero-subtitle">Empowering Global Learning Through Innovation</p>
+            <p class="hero-description">
+                At Ga Foundation, we believe that quality education should be accessible to everyone, everywhere. 
+                Our comprehensive online learning platform offers self-paced courses in language learning and 
+                test preparation, designed to help learners achieve their academic and professional goals from 
+                the comfort of their homes.
+            </p>
+                         <a href="IELTS/index.html" class="cta-button">
+                 <i class="fas fa-rocket"></i> Start Learning Today
+             </a>
+        </section>
+
+        <!-- Vision Section -->
+        <section class="vision-section">
+            <div class="vision-card fade-in-up">
+                <i class="fas fa-globe vision-icon"></i>
+                <h3 class="vision-title">Global Accessibility</h3>
+                <p class="vision-description">
+                    Breaking down geographical barriers to provide world-class education to learners across 
+                    the globe. Our platform is accessible 24/7, ensuring learning never stops.
+                </p>
+            </div>
+
+            <div class="vision-card fade-in-up">
+                <i class="fas fa-lightbulb vision-icon"></i>
+                <h3 class="vision-title">Innovative Learning</h3>
+                <p class="vision-description">
+                    Leveraging cutting-edge technology and pedagogical methods to create engaging, 
+                    interactive learning experiences that adapt to individual learning styles.
+                </p>
+            </div>
+
+            <div class="vision-card fade-in-up">
+                <i class="fas fa-users vision-icon"></i>
+                <h3 class="vision-title">Self-Paced Excellence</h3>
+                <p class="vision-description">
+                    Empowering learners to study at their own pace while maintaining the highest standards 
+                    of educational quality and comprehensive assessment systems.
+                </p>
+            </div>
+
+            <div class="vision-card fade-in-up">
+                <i class="fas fa-language vision-icon"></i>
+                <h3 class="vision-title">Multilingual Platform</h3>
+                <p class="vision-description">
+                    Offering comprehensive language learning modules in French, Tamil, and English, 
+                    along with specialized IELTS and CELPIP test preparation programs.
+                </p>
+            </div>
+
+            <div class="vision-card fade-in-up">
+                <i class="fas fa-certificate vision-icon"></i>
+                <h3 class="vision-title">Recognized Excellence</h3>
+                <p class="vision-description">
+                    Providing internationally recognized certification and test preparation that opens 
+                    doors to academic and professional opportunities worldwide.
+                </p>
+            </div>
+
+            <div class="vision-card fade-in-up">
+                <i class="fas fa-heart vision-icon"></i>
+                <h3 class="vision-title">Community Driven</h3>
+                <p class="vision-description">
+                    Building a supportive learning community where students can connect, collaborate, 
+                    and grow together while pursuing their educational aspirations.
+                </p>
+            </div>
+        </section>
+
+        <!-- Stats Section -->
+        <section class="stats-section fade-in-up">
+            <h2 style="font-size: 2.5rem; color: #8b4513; margin-bottom: 1rem; font-weight: bold;">Our Impact in Numbers</h2>
+            <p style="color: #666; font-size: 1.1rem; margin-bottom: 2rem;">Transforming lives through quality education</p>
+            
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">30,000+</span>
+                    <div class="stat-label">Lines of Content</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">15+</span>
+                    <div class="stat-label">Learning Modules</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">3</span>
+                    <div class="stat-label">Languages Supported</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <div class="stat-label">Self-Contained Platform</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">24/7</span>
+                    <div class="stat-label">Platform Availability</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">∞</span>
+                    <div class="stat-label">Learning Possibilities</div>
+                </div>
+            </div>
+        </section>
+
+        <!-- About Section -->
+        <section class="hero-section fade-in-up">
+            <h2 style="font-size: 2.5rem; color: #8b4513; margin-bottom: 2rem; font-weight: bold;">
+                <i class="fas fa-star" style="color: #d4af37;"></i> 
+                Our Mission
+            </h2>
+            <p class="hero-description">
+                To democratize quality education by providing comprehensive, self-paced online learning experiences 
+                that empower individuals to achieve their language learning and test preparation goals. We strive to 
+                create an inclusive, innovative, and supportive educational environment that transcends traditional 
+                boundaries and makes excellence accessible to all.
+            </p>
+            <div style="margin-top: 2rem; display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center;">
+                <span style="background: rgba(139, 69, 19, 0.1); color: #8b4513; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600;">
+                    <i class="fas fa-check"></i> Quality Education
+                </span>
+                <span style="background: rgba(139, 69, 19, 0.1); color: #8b4513; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600;">
+                    <i class="fas fa-check"></i> Global Accessibility
+                </span>
+                <span style="background: rgba(139, 69, 19, 0.1); color: #8b4513; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600;">
+                    <i class="fas fa-check"></i> Self-Paced Learning
+                </span>
+                <span style="background: rgba(139, 69, 19, 0.1); color: #8b4513; padding: 0.5rem 1rem; border-radius: 20px; font-weight: 600;">
+                    <i class="fas fa-check"></i> Innovative Technology
+                </span>
+            </div>
+        </section>
+    </main>
+
+    <!-- JavaScript for mobile menu -->
+    <script>
+        function toggleMobileMenu() {
+            const navMenu = document.getElementById('navMenu');
+            const toggleBtn = document.querySelector('.mobile-menu-toggle');
+            
+            navMenu.classList.toggle('active');
+            
+            // Update button icon
+            const icon = toggleBtn.querySelector('i');
+            if (navMenu.classList.contains('active')) {
+                icon.className = 'fas fa-times';
+                toggleBtn.setAttribute('aria-expanded', 'true');
+            } else {
+                icon.className = 'fas fa-bars';
+                toggleBtn.setAttribute('aria-expanded', 'false');
+            }
+        }
+
+        // Close mobile menu when clicking outside
+        document.addEventListener('click', function(event) {
+            const navMenu = document.getElementById('navMenu');
+            const toggleBtn = document.querySelector('.mobile-menu-toggle');
+            const navbar = document.querySelector('.navbar');
+            
+            if (!navbar.contains(event.target) && navMenu.classList.contains('active')) {
+                navMenu.classList.remove('active');
+                const icon = toggleBtn.querySelector('i');
+                icon.className = 'fas fa-bars';
+                toggleBtn.setAttribute('aria-expanded', 'false');
+            }
+        });
+
+        // Add smooth scrolling animation observer
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver(function(entries) {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+
+        // Observe all fade-in elements
+        document.addEventListener('DOMContentLoaded', function() {
+            const fadeElements = document.querySelectorAll('.fade-in-up');
+            fadeElements.forEach(el => {
+                el.style.opacity = '0';
+                el.style.transform = 'translateY(30px)';
+                el.style.transition = 'opacity 0.6s ease-out, transform 0.6s ease-out';
+                observer.observe(el);
+            });
+        });
+    </script>
+</body>
+</html> 
