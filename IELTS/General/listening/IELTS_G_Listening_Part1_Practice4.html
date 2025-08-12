@@ -947,7 +947,7 @@
         // Back button functionality - Firebase compatible
         function handleBackButton() {
             console.log('🔄 Back button clicked from IELTS Listening test');
-            if (window.loadLanguageContent || window.parent.loadLanguageContent) { if (window.loadLanguageContent) { window.loadLanguageContent('ielts', 'general'); } else if (window.parent.loadLanguageContent) { window.parent.loadLanguageContent('ielts', 'general'); } } else { if (window.history.length > 1) { window.history.back(); } else { window.location.href = 'Index.html#home'; } }
+            if (window.loadLanguageContent || window.parent.loadLanguageContent) { if (window.loadLanguageContent) { window.loadLanguageContent('ielts', 'general'); } else if (window.parent.loadLanguageContent) { window.parent.loadLanguageContent('ielts', 'general'); } } else { if (window.history.length > 1) { window.history.back(); } else { window.location.href = '../../index.html'; } }
         }
 
         // Navigation to sections
