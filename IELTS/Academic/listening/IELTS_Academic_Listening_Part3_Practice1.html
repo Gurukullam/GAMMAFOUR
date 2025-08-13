@@ -780,6 +780,88 @@
             }
         }
 
+        /* Auto-submit popup styles */
+        .auto-submit-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 10000;
+            display: none;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .auto-submit-popup {
+            background: white;
+            padding: 40px;
+            border-radius: 20px;
+            text-align: center;
+            box-shadow: 0 15px 50px rgba(0, 0, 0, 0.3);
+            border: 3px solid #d4af37;
+            max-width: 500px;
+            margin: 20px;
+        }
+
+        .auto-submit-title {
+            font-size: 1.8rem;
+            color: #8b4513;
+            margin-bottom: 15px;
+            font-weight: bold;
+        }
+
+        .auto-submit-message {
+            font-size: 1.1rem;
+            color: #333;
+            margin-bottom: 25px;
+            line-height: 1.6;
+        }
+
+        .auto-submit-countdown {
+            font-size: 2rem;
+            color: #d4af37;
+            font-weight: bold;
+            margin-bottom: 25px;
+        }
+
+        .auto-submit-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+        }
+
+        .auto-submit-btn {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .auto-submit-btn.primary {
+            background: linear-gradient(135deg, #d4af37, #8b4513);
+            color: white;
+        }
+
+        .auto-submit-btn.primary:hover {
+            background: linear-gradient(135deg, #8b4513, #5d3a0a);
+            transform: translateY(-2px);
+        }
+
+        .auto-submit-btn.secondary {
+            background: #f0f0f0;
+            color: #333;
+            border: 2px solid #d4af37;
+        }
+
+        .auto-submit-btn.secondary:hover {
+            background: rgba(212, 175, 55, 0.1);
+        }
+
         /* Smooth Scrolling */
         html {
             scroll-behavior: smooth;
@@ -966,7 +1048,7 @@
                             <div class="progress-fill" id="progressFill"></div>
                         </div>
                         <div class="time-display">
-                            <span id="currentTime">00:00</span> / <span id="totalTime">04:30</span>
+                            <span id="currentTime">00:00</span> / <span id="totalTime">07:00</span>
                         </div>
                     </div>
                 </div>
@@ -1167,7 +1249,7 @@
         let audioContext = null;
         let isPlaying = false;
         let currentTime = 0;
-        let totalDuration = 270; // 4.5 minutes in seconds
+        let totalDuration = 420; // 7 minutes in seconds for comprehensive conversation
         let audioInterval = null;
         let currentSpeaker = null;
 
@@ -1199,44 +1281,99 @@
             q30: 'Marcus will focus his literature review on social identity theories, which are relevant to understanding group behavior patterns.'
         };
 
-        // Multi-speaker conversation script with speaker identification
-        function getConversationScript() {
-            return [
-                { speaker: 'Dr. Chen', accent: 'en-GB', text: "Good afternoon, Marcus. Please, have a seat. I've reviewed your initial research proposal, and I'd like to discuss some key aspects with you today." },
-                
-                { speaker: 'Marcus', accent: 'en-US', text: "Thank you, Dr. Chen. I'm really excited about this project. As I mentioned in my proposal, my main research interest is social psychology, particularly group behavior and social influence in academic settings." },
-                
-                { speaker: 'Dr. Chen', accent: 'en-GB', text: "Yes, that's an excellent area of study. Now, before we discuss methodology, I must emphasize that ethical implications are the most important consideration when designing any psychology experiment. We must always prioritize participant welfare." },
-                
-                { speaker: 'Marcus', accent: 'en-US', text: "Absolutely, I understand that. But I'm actually quite concerned about sample size calculation. I'm wondering whether I'll have enough participants to achieve statistical significance. How many do you think I'll need?" },
-                
-                { speaker: 'Dr. Chen', accent: 'en-GB', text: "Well, for your type of study, I'd recommend a minimum of sixty participants. This should provide adequate statistical power. However, I think you should consider a mixed methods approach for this research." },
-                
-                { speaker: 'Marcus', accent: 'en-US', text: "Mixed methods? Could you explain what you mean by that?" },
-                
-                { speaker: 'Dr. Chen', accent: 'en-GB', text: "Certainly. I suggest combining both qualitative interviews and quantitative surveys. This will give you comprehensive data - the surveys will provide statistical evidence, while interviews will offer deeper insights into participant motivations." },
-                
-                { speaker: 'Marcus', accent: 'en-US', text: "That sounds really valuable. What about the timeline? I've planned to complete everything within this academic year. Do you think that's realistic?" },
-                
-                { speaker: 'Dr. Chen', accent: 'en-GB', text: "Yes, I believe your timeline is realistic for a final year project, provided you plan carefully. You'll need to submit your research proposal to the ethics committee before starting any data collection, though." },
-                
-                { speaker: 'Marcus', accent: 'en-US', text: "Right, the ethics committee approval. How long does that usually take?" },
-                
-                { speaker: 'Dr. Chen', accent: 'en-GB', text: "Typically about three weeks. For your quantitative analysis, I'd recommend using statistical software like SPSS or R. Are you familiar with these programs?" },
-                
-                { speaker: 'Marcus', accent: 'en-US', text: "I've used SPSS in my statistics course, so that should be fine. What about the literature review? I want to make sure I'm covering the right theoretical framework." },
-                
-                { speaker: 'Dr. Chen', accent: 'en-GB', text: "For your focus on group behavior, I'd suggest concentrating your literature review on social identity theories. These are particularly relevant to understanding how individuals behave within group contexts." },
-                
-                { speaker: 'Marcus', accent: 'en-US', text: "Social identity theories - that makes perfect sense. This has been incredibly helpful, Dr. Chen. When should we meet again to review my revised proposal?" },
-                
-                { speaker: 'Dr. Chen', accent: 'en-GB', text: "How about in two weeks? That should give you enough time to incorporate today's feedback and revise your methodology section. Make sure to include the ethics committee submission timeline in your planning." },
-                
-                { speaker: 'Marcus', accent: 'en-US', text: "Perfect. Two weeks it is. Thank you so much for your guidance, Dr. Chen. I feel much more confident about my research direction now." },
-                
-                { speaker: 'Dr. Chen', accent: 'en-GB', text: "You're very welcome, Marcus. Remember, good research takes time and careful planning. I'm confident you'll produce excellent work. See you in two weeks." }
-            ];
-        }
+        // Academic conversation data with enhanced TTS integration
+        const conversationData = [
+            {
+                speaker: "Dr. Sarah Chen",
+                text: "Good afternoon, Marcus. Please, have a seat. I've reviewed your initial research proposal, and I'd like to discuss some key aspects with you today.",
+                duration: 8000
+            },
+            {
+                speaker: "Marcus Williams",
+                text: "Thank you, Dr. Chen. I'm really excited about this project. As I mentioned in my proposal, my main research interest is social psychology, particularly group behavior and social influence in academic settings.",
+                duration: 12000
+            },
+            {
+                speaker: "Dr. Sarah Chen",
+                text: "Yes, that's an excellent area of study. Now, before we discuss methodology, I must emphasize that ethical implications are the most important consideration when designing any psychology experiment. We must always prioritize participant welfare.",
+                duration: 14000
+            },
+            {
+                speaker: "Marcus Williams",
+                text: "Absolutely, I understand that. But I'm actually quite concerned about sample size calculation. I'm wondering whether I'll have enough participants to achieve statistical significance. How many do you think I'll need?",
+                duration: 11000
+            },
+            {
+                speaker: "Dr. Sarah Chen",
+                text: "Well, for your type of study, I'd recommend a minimum of sixty participants. This should provide adequate statistical power. However, I think you should consider a mixed methods approach for this research.",
+                duration: 12000
+            },
+            {
+                speaker: "Marcus Williams",
+                text: "Mixed methods? Could you explain what you mean by that?",
+                duration: 4000
+            },
+            {
+                speaker: "Dr. Sarah Chen",
+                text: "Certainly. I suggest combining both qualitative interviews and quantitative surveys. This will give you comprehensive data - the surveys will provide statistical evidence, while interviews will offer deeper insights into participant motivations.",
+                duration: 16000
+            },
+            {
+                speaker: "Marcus Williams",
+                text: "That sounds really valuable. What about the timeline? I've planned to complete everything within this academic year. Do you think that's realistic?",
+                duration: 9000
+            },
+            {
+                speaker: "Dr. Sarah Chen",
+                text: "Yes, I believe your timeline is realistic for a final year project, provided you plan carefully. You'll need to submit your research proposal to the ethics committee before starting any data collection, though.",
+                duration: 13000
+            },
+            {
+                speaker: "Marcus Williams",
+                text: "Right, the ethics committee approval. How long does that usually take?",
+                duration: 6000
+            },
+            {
+                speaker: "Dr. Sarah Chen",
+                text: "Typically about three weeks. For your quantitative analysis, I'd recommend using statistical software like SPSS or R. Are you familiar with these programs?",
+                duration: 11000
+            },
+            {
+                speaker: "Marcus Williams",
+                text: "I've used SPSS in my statistics course, so that should be fine. What about the literature review? I want to make sure I'm covering the right theoretical framework.",
+                duration: 10000
+            },
+            {
+                speaker: "Dr. Sarah Chen",
+                text: "For your focus on group behavior, I'd suggest concentrating your literature review on social identity theories. These are particularly relevant to understanding how individuals behave within group contexts.",
+                duration: 13000
+            },
+            {
+                speaker: "Marcus Williams",
+                text: "Social identity theories - that makes perfect sense. This has been incredibly helpful, Dr. Chen. When should we meet again to review my revised proposal?",
+                duration: 9000
+            },
+            {
+                speaker: "Dr. Sarah Chen",
+                text: "How about in two weeks? That should give you enough time to incorporate today's feedback and revise your methodology section. Make sure to include the ethics committee submission timeline in your planning.",
+                duration: 12000
+            },
+            {
+                speaker: "Marcus Williams",
+                text: "Perfect. Two weeks it is. Thank you so much for your guidance, Dr. Chen. I feel much more confident about my research direction now.",
+                duration: 8000
+            },
+            {
+                speaker: "Dr. Sarah Chen",
+                text: "You're very welcome, Marcus. Remember, good research takes time and careful planning. I'm confident you'll produce excellent work. See you in two weeks.",
+                duration: 9000
+            },
+            {
+                speaker: "pause",
+                text: "",
+                duration: 3000
+            }
+        ];
 
         // Audio control functions with multi-speaker support
         function playAudio() {
@@ -1417,7 +1554,8 @@
             document.getElementById('currentTime').textContent = formatTime(currentTime);
             
             if (currentTime >= totalDuration) {
-                stopAudio();
+                console.log('⏰ Timer completed - showing auto-submit popup');
+                showAutoSubmitPopup();
             }
         }
 
