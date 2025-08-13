@@ -25,10 +25,12 @@
 ### Audio Implementation
 - **Multi-Speaker TTS**: Different voice profiles for conversation participants
 - **Accent Variation**: British, American, Australian accents across practices
-- **Conversation Pacing**: Natural dialogue rhythm with pauses and interruptions
+- **Enhanced Conversation Pacing**: Natural dialogue rhythm with 2-second pauses between speakers
 - **Academic Vocabulary**: University-level terminology and expressions
-- **Chunked Audio System**: Optimized segments for reliable TTS delivery
-- **Themed Audio Controls**: Golden/brown styled progress bars and controls
+- **Robust Conversation System**: Complete audio playback with error handling and completion detection
+- **Extended Duration**: 7-minute timer with 2-minute buffer for comprehensive conversation coverage
+- **Natural Conversation Flow**: Proper introduction, development, and conclusion segments
+- **Themed Audio Controls**: Golden/brown styled progress bars and simplified play button interface
 
 ---
 
@@ -193,21 +195,103 @@
 
 ### **Technical Implementation Requirements**
 
-#### **Multi-Speaker TTS Configuration**
+#### **Enhanced Multi-Speaker TTS Configuration**
 ```javascript
-// Practice-specific voice assignments
-const voiceProfiles = {
-  practice1: {
-    drChen: { lang: 'en-GB', gender: 'female', rate: 0.8 },
-    marcus: { lang: 'en-US', gender: 'male', rate: 0.9 }
+// Academic conversation data with comprehensive timing
+const conversationData = [
+  {
+    speaker: "Professor David Wright",
+    text: "Good afternoon, Anna. Please, have a seat...",
+    duration: 8000
   },
-  practice2: {
-    emma: { lang: 'en-GB', gender: 'female', rate: 0.9 },
-    raj: { lang: 'en-AU', gender: 'male', rate: 0.85 },
-    lisa: { lang: 'en-US', gender: 'female', rate: 0.8 }
+  {
+    speaker: "Anna Rodriguez", 
+    text: "Thank you, Professor Wright...",
+    duration: 10000
   },
-  // ... additional practices
+  // ... additional segments with proper timing
+  {
+    speaker: "pause",
+    text: "",
+    duration: 3000
+  }
+];
+
+// Voice configuration for different speakers
+const voiceConfig = {
+  "Professor David Wright": {
+    rate: 0.8, pitch: 0.9, volume: 0.9, lang: 'en-GB'
+  },
+  "Anna Rodriguez": {
+    rate: 0.9, pitch: 1.1, volume: 0.9, lang: 'en-US'
+  }
 };
+
+// Enhanced audio timing with 7-minute duration
+let totalDuration = conversationData.reduce((sum, item) => sum + item.duration, 0) + 120000; // Add 2 minutes buffer
+
+// Auto-submit timer functionality
+let autoSubmitInterval;
+let autoSubmitCountdown = 10;
+
+function showAutoSubmitPopup() {
+  // Stop audio and show completion popup
+  isPlaying = false;
+  speechSynthesis.cancel();
+  clearInterval(audioInterval);
+  
+  document.getElementById('autoSubmitOverlay').style.display = 'flex';
+  
+  // Start 10-second countdown for auto-submission
+  autoSubmitInterval = setInterval(() => {
+    autoSubmitCountdown--;
+    if (autoSubmitCountdown <= 0) {
+      handleAutoSubmit();
+    }
+  }, 1000);
+}
+
+// Enhanced results system with detailed explanations
+const explanations = {
+  q21: 'Specific quote from conversation explaining the correct answer...',
+  q22: 'Academic discussion context with exact speaker reference...',
+  // ... additional explanations for all questions
+};
+
+function submitAnswers() {
+  let score = 0;
+  const answers = {};
+  const reviewHTML = [];
+  
+  // Process all answers with detailed feedback
+  for (let i = 21; i <= 30; i++) {
+    const questionName = `q${i}`;
+    const answer = getUserAnswer(questionName);
+    const correct = correctAnswers[questionName];
+    const isCorrect = checkAnswer(answer, correct);
+    
+    if (isCorrect) score++;
+    
+    // Generate detailed review item
+    reviewHTML.push(`
+      <div class="review-item ${isCorrect ? 'correct' : 'incorrect'}">
+        <strong>Question ${i}:</strong> ${isCorrect ? '✅' : '❌'}<br>
+        <strong>Your answer:</strong> ${answer || '<em>No answer</em>'}<br>
+        <strong>Correct answer:</strong> ${correct}<br>
+        <strong>Explanation:</strong> ${explanations[questionName]}
+      </div>
+    `);
+  }
+  
+  // Update display with comprehensive results
+  document.getElementById('scoreNumber').textContent = score;
+  document.getElementById('answerReview').innerHTML = reviewHTML.join('');
+  
+  // Generate performance-based improvement tips
+  const tips = generateImprovementTips(score);
+  document.getElementById('improvementList').innerHTML = 
+    tips.map(tip => `<li>${tip}</li>`).join('');
+}
 ```
 
 #### **Speaker Identification Interface**
@@ -215,6 +299,18 @@ const voiceProfiles = {
 - **Dynamic Highlighting**: Real-time speaker identification during audio
 - **Academic Profile Display**: University position, research interests
 - **Conversation Timeline**: Turn-taking visualization with academic context
+
+#### **Audio Enhancement Features (2024 Update)**
+- **Extended Duration**: 7-minute timer ensures complete conversation playback
+- **Natural Conversation Flow**: 2-second pauses between speakers for realistic academic dialogue
+- **Robust Completion Detection**: Audio plays until all segments finish naturally
+- **Error Recovery**: Automatic continuation if TTS encounters issues
+- **Progress Tracking**: Real-time progress updates without premature cutoffs
+- **Pause Segment Handling**: Dedicated pause segments for natural conversation endings
+- **Debug Logging**: Console output for troubleshooting audio playback issues
+- **Simplified Interface**: Single "Play" button with clear state feedback
+- **Auto-Submit Timer**: Popup notification when time completes with automatic submission option
+- **IELTS Test Simulation**: Realistic test conditions with timed completion warnings
 
 #### **Question Type Interface Specifications**
 
@@ -314,6 +410,79 @@ const voiceProfiles = {
 - **Progress Indicators**: Themed academic progress tracking
 - **Section Styling**: University-appropriate visual design
 - **Button Consistency**: Academic interaction elements
+- **Auto-Submit Popup**: Professional overlay with countdown timer and IELTS-style messaging
+- **Enhanced Results Display**: Professional scoring interface with detailed answer analysis
+- **Review Item Styling**: Color-coded feedback with academic presentation standards
+- **Performance Tips Styling**: Structured improvement guidance with university branding
+
+### Auto-Submit Timer Implementation (2024 Feature)
+
+#### **Functionality Overview**
+When the 7-minute listening timer completes, an automatic popup appears to simulate real IELTS test conditions:
+
+#### **Popup Features**
+- **Modal Overlay**: Dark background with centered popup
+- **10-Second Countdown**: Visual countdown timer before auto-submission
+- **Two Options**: "Submit Now" (primary) or "Continue Working" (secondary)
+- **IELTS Simulation**: Mimics actual test time completion warnings
+- **Professional Styling**: Academic golden/brown theme consistency
+
+#### **User Experience Flow**
+1. **Timer Completion**: When progress reaches 100% (7 minutes)
+2. **Audio Stops**: All speech synthesis and intervals are cleared
+3. **Popup Display**: Modal overlay appears with completion message
+4. **Countdown Timer**: 10-second countdown for automatic submission
+5. **User Choice**: Submit immediately or continue working
+6. **Auto-Submit**: If no action taken, answers submit automatically
+
+#### **Implementation Benefits**
+- **Realistic Test Conditions**: Simulates actual IELTS timing pressure
+- **User Control**: Option to continue working despite time completion
+- **Clear Feedback**: Professional messaging about test completion
+- **Accessibility**: Large, clear buttons with distinct styling
+
+### Enhanced Results System (2024 Update)
+
+#### **Professional Results Display**
+All Part 3 practices now feature a comprehensive results system matching Part 2 professional standards:
+
+#### **Visual Structure Components**
+- **Score Display**: Large, prominent scoring with "X out of 10 questions correct" format
+- **Individual Answer Review**: Detailed analysis for each question with visual indicators
+- **Performance-Based Tips**: Targeted improvement guidance based on score ranges
+- **Academic Styling**: Consistent golden/brown theme with professional presentation
+
+#### **Detailed Answer Analysis Features**
+- **Visual Feedback**: Green borders for correct answers, red borders for incorrect answers
+- **Answer Comparison**: Clear display of user answer vs. correct answer
+- **Conversation Quotes**: Specific excerpts from academic conversations explaining correct answers
+- **Academic Context**: References to exact moments in supervision/discussion meetings
+
+#### **Question-Specific Explanations System**
+Each practice includes conversation-specific explanations:
+- **Practice 1**: Tutorial methodology discussions between Dr. Chen and Marcus
+- **Practice 2**: Group project planning conversations with Emma, Raj, and Lisa
+- **Practice 3**: PhD supervision discussions between Professor Wright and Anna
+- **Practice 4**: Academic advising sessions with Dr. Johnson, Sophie, and Tom
+- **Practice 5**: Thesis supervision meetings with Professor Smith, Dr. Kim, and Alex
+
+#### **Performance-Based Improvement System**
+- **0-3 Points**: Basic listening skills and academic vocabulary development
+- **4-6 Points**: Prediction skills and multi-speaker conversation tracking
+- **7-8 Points**: Detail accuracy and concentration enhancement techniques
+- **9-10 Points**: Excellence maintenance and advanced time management strategies
+
+#### **Academic Learning Enhancement**
+- **Conversation Understanding**: Direct quotes help users understand missed audio content
+- **Methodology Familiarity**: Exposure to realistic academic discussion patterns
+- **Vocabulary Development**: Context-rich explanations enhance academic language learning
+- **Test Preparation**: Professional feedback mirrors actual IELTS assessment standards
+
+#### **Implementation Standards**
+- **Explanations Object**: JavaScript object containing conversation-specific explanations for each question
+- **Review Item Generation**: Dynamic HTML generation for individual question analysis
+- **Score-Based Tips**: Conditional improvement suggestions based on performance level
+- **Visual Consistency**: Matching CSS styling with Part 2 professional presentation standards
 
 ### Academic Navigation Structure
 - **Practice Introduction**: Academic context and speaker profiles
@@ -513,6 +682,24 @@ const voiceProfiles = {
 - **Question Completion Rates**: Academic assessment participation
 - **Learning Outcome Achievement**: University skill development success
 
+### Enhanced Results System Effectiveness (2024 Metrics)
+- **Explanation Comprehension**: User understanding of conversation-specific feedback
+- **Performance Improvement Tracking**: Score-based tip effectiveness measurement
+- **Academic Context Learning**: Conversation quote comprehension rates
+- **Detailed Feedback Utilization**: Professional review item engagement levels
+- **Improvement Tip Implementation**: Performance-based guidance follow-through rates
+- **Visual Feedback Clarity**: Color-coded answer review system effectiveness
+- **Professional Presentation Impact**: Part 2 consistency achievement in user satisfaction
+
+### Implementation Quality Standards
+- **Explanation Accuracy**: Conversation quotes match actual audio content
+- **Visual Consistency**: Results styling matches Part 2 professional standards
+- **Performance Guidance**: Improvement tips appropriately target score ranges
+- **Academic Authenticity**: Feedback maintains university-level discourse quality
+- **Technical Reliability**: Results generation functions operate without errors
+- **Mobile Responsiveness**: Enhanced results display optimally on all devices
+- **Accessibility Compliance**: Professional feedback meets inclusive design standards
+
 ---
 
-*This strategy document will be updated as practices are developed and user feedback is incorporated, ensuring continuous improvement in academic conversation listening skill development.* 
+*This strategy document will be updated as practices are developed and user feedback is incorporated, ensuring continuous improvement in academic conversation listening skill development and professional results presentation.* 
