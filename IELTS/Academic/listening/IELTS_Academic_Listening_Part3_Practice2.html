@@ -1103,7 +1103,7 @@
                             <div class="progress-fill" id="progressFill"></div>
                         </div>
                         <div class="time-display">
-                            <span id="currentTime">00:00</span> / <span id="totalTime">04:30</span>
+                            <span id="currentTime">00:00</span> / <span id="totalTime">07:00</span>
                         </div>
                     </div>
                 </div>
@@ -1302,7 +1302,7 @@
         let audioContext = null;
         let isPlaying = false;
         let currentTime = 0;
-        let totalDuration = 270; // 4.5 minutes in seconds
+        let totalDuration = 420; // 7 minutes in seconds for comprehensive conversation
         let audioInterval = null;
         let currentSpeaker = null;
 
@@ -1568,7 +1568,8 @@
             document.getElementById('currentTime').textContent = formatTime(currentTime);
             
             if (currentTime >= totalDuration) {
-                stopAudio();
+                console.log('⏰ Timer completed - showing auto-submit popup');
+                showAutoSubmitPopup();
             }
         }
 
