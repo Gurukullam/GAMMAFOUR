@@ -12,7 +12,25 @@
     .gk-logo-container { position: fixed; top: 30px; right: 30px; z-index: 1002; display: flex; flex-direction: column; align-items: center; gap: .3rem; cursor: pointer; padding: 5px; border-radius: 10px; transition: all .3s ease; }
     .gk-logo-container:hover { background: rgba(255,255,255,0.2); transform: translateY(-2px); box-shadow: 0 4px 15px rgba(139,69,19,0.3); }
     .master-guruvammal-logo { position: relative; display: inline-flex; align-items: center; justify-content: center; width: 50px; height: 50px; font-family: 'Century Gothic', sans-serif; font-size: 26px; font-weight: 900; letter-spacing: -1px; line-height: 1; color: #5d3a0a; text-shadow: 1px 1px 2px rgba(255,255,255,0.3); background: linear-gradient(135deg, rgba(212,175,55,0.15) 0%, rgba(139,69,19,0.25) 50%, rgba(205,133,63,0.2) 100%); backdrop-filter: blur(10px); border-radius: 6px; padding: 10px; box-shadow: 0 8px 25px rgba(139,69,19,0.3), 0 0 40px rgba(212,175,55,0.2); transition: all .3s ease; }
-    .master-guruvammal-logo .musical-corner { position: absolute; top: 2px; right: 3px; font-size: 10px; color: #5d3a0a; font-weight: 900; }
+            .master-guruvammal-logo .musical-corner {
+            position: absolute;
+            top: 3px;
+            right: 4px;
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background-color: transparent;
+            border: 1px solid #5d3a0a;
+            color: #5d3a0a;
+            font-family: 'Century Gothic', sans-serif;
+            font-size: 7px;
+            font-weight: 900;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-shadow: 1px 1px 2px rgba(255, 255, 255, 0.3);
+            box-shadow: none;
+        }
     .master-guruvammal-logo:hover { transform: scale(1.1); box-shadow: 0 10px 30px rgba(139,69,19,0.4), 0 0 50px rgba(212,175,55,0.3); }
     .back-label { font-size: .75rem; font-weight: 600; color: #8b4513; font-family: 'Century Gothic', sans-serif; text-shadow: 1px 1px 2px rgba(255,255,255,0.8); transition: all .3s ease; }
     .gk-logo-container:hover .back-label { color: #5d3a0a; transform: translateY(-1px); }
@@ -122,7 +140,7 @@
 <body>
   <div class="header-spacer"></div>
   <div class="gk-logo-container" onclick="handleBackButton()">
-    <div class="master-guruvammal-logo">Ga<span class="musical-corner">♪</span></div>
+    <div class="master-guruvammal-logo">Ga<span class="musical-corner">P</span></div>
     <div class="back-label">Back</div>
   </div>
 
