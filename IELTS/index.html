@@ -758,7 +758,6 @@
                             <a href="#ielts-general-reading-practice" onclick="selectIeltsGeneralOption('Reading')"><i class="fas fa-book-open"></i> Reading</a>
                             <a href="#ielts-general-writing-practice" onclick="selectIeltsGeneralOption('Writing')"><i class="fas fa-edit"></i> Writing</a>
                             <a href="#ielts-general-speaking-practice" onclick="selectIeltsGeneralOption('Speaking')"><i class="fas fa-microphone"></i> Speaking</a>
-                            <a href="#ielts-general-mock-test-practice" onclick="selectIeltsGeneralOption('Mock Test')"><i class="fas fa-clipboard-list"></i> Mock Test</a>
                         </div>
                     </li>
                     <li class="ielts-academic-menu" onmouseenter="cancelSubmenuTimeout('ieltsAcademic')" onmouseleave="startSubmenuTimeout('ieltsAcademic')">
@@ -768,7 +767,6 @@
                             <a href="#ielts-academic-reading-practice" onclick="selectIeltsAcademicOption('Reading')"><i class="fas fa-book-open"></i> Reading</a>
                             <a href="#ielts-academic-writing-practice" onclick="selectIeltsAcademicOption('Writing')"><i class="fas fa-edit"></i> Writing</a>
                             <a href="#ielts-academic-speaking-practice" onclick="selectIeltsAcademicOption('Speaking')"><i class="fas fa-microphone"></i> Speaking</a>
-                            <a href="#ielts-academic-mock-test-practice" onclick="selectIeltsAcademicOption('Mock Test')"><i class="fas fa-clipboard-list"></i> Mock Test</a>
                         </div>
                     </li>
                 </ul>
@@ -780,11 +778,10 @@
     <main class="main-content">
         <!-- IELTS Hero Section -->
         <section class="hero-section fade-in" style="background: rgba(255, 255, 255, 0.95); backdrop-filter: blur(10px); border-radius: 15px; box-shadow: 0 5px 20px rgba(0,0,0,0.1); padding: 4rem 2rem; text-align: center; margin-bottom: 3rem; position: relative; overflow: hidden; max-width: 1200px; margin-left: auto; margin-right: auto; margin-bottom: 3rem;">
-            <h1 style="font-size: 3rem; font-weight: bold; color: #8b4513; margin-bottom: 1rem; position: relative; z-index: 1;">IELTS - International English Language Testing System</h1>
-            <h2 style="font-size: 1.5rem; color: #3c2d1f; margin-bottom: 2rem; position: relative; z-index: 1;">The World's Most Popular English Proficiency Test</h2>
-            <p style="font-size: 1.1rem; color: #666; max-width: 900px; margin: 0 auto 2rem; position: relative; z-index: 1; line-height: 1.6;">
-                IELTS is recognized by over 12,000 organizations worldwide, including universities, employers, professional bodies, and immigration authorities. 
-                Over 4 million people take the IELTS test every year to fulfill their study, work, or migration goals.
+            <h1 style="font-size: 3rem; font-weight: bold; color: #8b4513; margin-bottom: 1rem; position: relative; z-index: 1; font-family: 'Century Gothic', sans-serif;">GammaPace IELTS Practice Module</h1>
+            <h2 style="font-size: 1.5rem; color: #3c2d1f; margin-bottom: 2rem; position: relative; z-index: 1; font-family: 'Century Gothic', sans-serif;">Comprehensive Interactive IELTS Preparation Platform</h2>
+            <p style="font-size: 1.1rem; color: #666; max-width: 900px; margin: 0 auto 2rem; position: relative; z-index: 1; line-height: 1.6; text-align: justify; font-family: 'Century Gothic', sans-serif;">
+                GammaPace offering with Practice module for the IELTS provides a comprehensive and interactive platform designed to help learners prepare effectively for the International English Language Testing System (IELTS)—the world's most widely accepted English proficiency test. Recognized by over 12,000 institutions globally, including universities, employers, and immigration authorities, IELTS is taken by more than 4 million candidates annually to achieve their academic, professional, or migration aspirations. GammaPace's Practice module simulates real test conditions, offering targeted exercises across Listening, Reading, Writing, and Speaking sections. With personalized feedback, performance tracking, and expert tips, learners gain the confidence and skills needed to succeed. Whether you're aiming to study abroad, advance your career, or relocate, GammaPace empowers you to reach your IELTS goals efficiently.
             </p>
         </section>
 
@@ -1329,11 +1326,7 @@
                 return;
             }
             
-            if (skill === 'Mock Test') {
-                console.log(`🔗 Navigating to: IELTS General Mock Test`);
-                window.location.href = 'General/mocktest/IELTS_General_MockTest_Introduction.html';
-                return;
-            }
+
         }
 
         // IELTS Academic Option Selection Function
@@ -1368,12 +1361,6 @@
             if (skill === 'Speaking') {
                 console.log(`🔗 Navigating to: IELTS Academic Speaking`);
                 window.location.href = 'Academic/speaking/IELTS_Academic_Speaking_Introduction.html';
-                return;
-            }
-            
-            if (skill === 'Mock Test') {
-                console.log(`🔗 Navigating to: IELTS Academic Mock Test`);
-                window.location.href = 'Academic/mocktest/IELTS_Academic_MockTest_Introduction.html';
                 return;
             }
         }
